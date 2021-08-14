@@ -39,12 +39,11 @@ func Binding(ctx context.Context, obj interface{}, next graphql.Resolver, constr
 			if !ok {
 				return nil, fmt.Errorf("[trim] failed, %s is not a string", fieldName)
 			}
-
 			tempStr := strings.Trim(*tempVal, " ")
 			val = &tempStr
+		} else {
+			val = strings.Trim(tempVal, " ")
 		}
-
-		val = strings.Trim(tempVal, " ")
 	}
 
 	err = validate.Var(val, constraint)
