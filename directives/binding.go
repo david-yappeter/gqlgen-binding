@@ -35,7 +35,13 @@ func Binding(ctx context.Context, obj interface{}, next graphql.Resolver, constr
 	if trim != nil && *trim {
 		tempVal, ok := val.(string)
 		if !ok {
-			return nil, fmt.Errorf("[trim] failed, %s is not a string", fieldName)
+			tempVal, ok := val.(*string)
+			if !ok {
+				return nil, fmt.Errorf("[trim] failed, %s is not a string", fieldName)
+			}
+
+			tempStr := strings.Trim(*tempVal, " ")
+			val = &tempStr
 		}
 
 		val = strings.Trim(tempVal, " ")
