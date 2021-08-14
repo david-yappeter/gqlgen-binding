@@ -50,7 +50,7 @@ func (g *gqlgenBinding) InjectSourceEarly() *ast.Source {
 		Name:    "gqlgenBinding/directives.graphql",
 		BuiltIn: false,
 		Input: `
-            directive @binding(constraint: String!, trim: Boolean) on INPUT_FIELD_DEFINITION
+            directive @binding(constraint: String!, trim: Boolean) on OBJECT | FIELD_DEFINITION | ENUM_VALUE | INPUT_FIELD_DEFINITION | ENUM | INPUT_OBJECT | ARGUMENT_DEFINITION
         `,
 	}
 }
