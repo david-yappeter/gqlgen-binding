@@ -55,3 +55,13 @@ func Binding(ctx context.Context, obj interface{}, next graphql.Resolver, constr
 
 	return val, nil
 }
+
+func ValidateAddTranslation(tag string, message string) {
+	validate.RegisterTranslation(tag, trans, func(ut ut.Translator) error {
+		return ut.Add(tag, message, true) // see universal-translator for details
+	}, func(ut ut.Translator, fe validator.FieldError) string {
+		t, _ := ut.T(tag, fe.Field())
+
+		return t
+	})
+}
